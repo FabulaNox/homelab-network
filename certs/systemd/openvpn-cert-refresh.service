@@ -1,0 +1,7 @@
+[Unit]
+Description=Re-extract LE cert for OpenVPN after a reverse-proxy renewal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/sbin/extract-le-cert.py
+ExecStartPost=/bin/systemctl reload openvpn-server@server

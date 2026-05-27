@@ -1,0 +1,7 @@
+[Unit]
+Description=Extract renewed cert from acme.json and restart dnsproxy
+After=dnsproxy.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/dnsproxy-cert-update.py

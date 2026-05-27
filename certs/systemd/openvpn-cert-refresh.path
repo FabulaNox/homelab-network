@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch acme.json for cert renewals (OpenVPN)
+
+[Path]
+PathModified=/srv/docker/tier0/certs/acme.json
+Unit=openvpn-cert-refresh.service
+
+[Install]
+WantedBy=multi-user.target

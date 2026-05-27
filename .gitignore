@@ -1,0 +1,6 @@
+# Python bytecode (the cert scripts are Python)
+__pycache__/
+*.pyc
+*.pyo
+
+.DS_Store

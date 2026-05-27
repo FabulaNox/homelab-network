@@ -1,0 +1,27 @@
+[Unit]
+Description=dnsproxy DoH frontend for Unbound
+After=unbound.service
+Requires=unbound.service
+
+[Service]
+# DoH (DNS-over-HTTPS) terminator in front of Unbound. Clients that speak DoH
+# hit this on :8053; it forwards plaintext to Unbound on 127.0.0.1:53. The TLS
+# cert is the same wildcard the reverse proxy renews, kept current by a path
+# watcher (see ../certs/). No cache here - Unbound already caches.
+ExecStart=/usr/local/bin/dnsproxy \
+  --listen=0.0.0.0 \
+  --port=0 \
+  --https-port=8053 \
+  --tls-crt=/etc/dnsproxy-cert.pem \
+  --tls-key=/etc/dnsproxy-key.pem \
+  --http3=false \
+  --upstream=127.0.0.1:53 \
+  --timeout=3s \
+  --cache=false \
+  --verbose
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

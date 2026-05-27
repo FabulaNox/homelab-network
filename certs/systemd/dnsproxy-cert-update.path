@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch acme.json for cert renewals (dnsproxy)
+
+[Path]
+PathModified=/srv/docker/tier0/certs/acme.json
+Unit=dnsproxy-cert-update.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 880" width="100%" height="100%"
+     font-family="'Share Tech Mono', ui-monospace, 'Courier New', monospace">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#6e7681"/>
+    </marker>
+    <marker id="ar-vpn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#00cc7a"/>
+    </marker>
+    <marker id="ar-out" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#00ff9d"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1080" height="880" fill="#0d1117"/>
+
+  <!-- ===== group containers ===== -->
+  <rect x="60" y="340" width="800" height="38" rx="4" fill="#1c2128" stroke="#30363d" stroke-width="1.5"/>
+  <text x="460" y="364" text-anchor="middle" font-size="13" fill="#8b949e">Management LAN &#183; 192.0.2.0/24</text>
+
+  <rect x="470" y="430" width="500" height="382" rx="8" fill="#10151c" stroke="#30363d" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="490" y="452" font-size="14" fill="#00cc7a">// Core Server (bare-metal host)</text>
+
+  <rect x="488" y="580" width="464" height="146" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.2"/>
+  <text x="720" y="600" text-anchor="middle" font-size="12" fill="#6e7681">VirtualBox VMs (bridged to LAN, except REMnux)</text>
+
+  <!-- ===== connections ===== -->
+  <g fill="none" stroke-linejoin="round">
+    <path d="M500 126 L500 196" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <text x="512" y="165" font-size="12" fill="#8b949e">WAN NAT: VPN port only</text>
+    <path d="M450 262 L450 338" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M170 378 L170 436" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M360 378 L360 436" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M360 492 L360 528" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M84 378 L84 555 L100 555" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <path d="M685 378 L685 430" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- reverse proxy -> gitlab (forge) -->
+    <path d="M720 530 L674 530" stroke="#6e7681" stroke-width="2" marker-end="url(#ar)"/>
+
+    <!-- VPN: edge -> OpenVPN (top-right, sole inbound) -->
+    <path d="M620 232 L910 232 L910 494 L872 494" stroke="#00cc7a" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar-vpn)"/>
+    <text x="904" y="223" text-anchor="end" font-size="12" fill="#00cc7a">VPN port (sole inbound)</text>
+
+    <!-- outbound tunnel: reverse proxy dials out to the internet (exits to the side, clear of the label) -->
+    <path d="M870 544 L1010 544 L1010 70 L552 70" stroke="#00ff9d" stroke-width="2" stroke-dasharray="7,4" marker-end="url(#ar-out)"/>
+    <text x="1004" y="50" text-anchor="end" font-size="12" fill="#00ff9d">outbound tunnel: dials out,</text>
+    <text x="1004" y="65" text-anchor="end" font-size="12" fill="#00ff9d">no inbound port</text>
+  </g>
+
+  <!-- ===== nodes ===== -->
+  <circle cx="500" cy="82" r="44" fill="#161b22" stroke="#6e7681" stroke-width="2"/>
+  <text x="500" y="87" text-anchor="middle" font-size="14" fill="#8b949e">Internet</text>
+
+  <rect x="380" y="200" width="240" height="60" rx="8" fill="#161b22" stroke="#00cc7a" stroke-width="2"/>
+  <text x="500" y="236" text-anchor="middle" font-size="14" fill="#e6edf3">Edge Router / Firewall</text>
+
+  <rect x="100" y="440" width="140" height="50" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="170" y="470" text-anchor="middle" font-size="13" fill="#e6edf3">Workstation</text>
+
+  <rect x="280" y="440" width="160" height="50" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="360" y="470" text-anchor="middle" font-size="13" fill="#e6edf3">Secondary Wi-Fi AP</text>
+
+  <rect x="280" y="530" width="160" height="50" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="360" y="560" text-anchor="middle" font-size="13" fill="#e6edf3">Laptop</text>
+
+  <rect x="100" y="530" width="140" height="50" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="170" y="560" text-anchor="middle" font-size="11" fill="#e6edf3">Mobile (Kali chroot)</text>
+
+  <!-- core top: GitLab (left) | OpenVPN over Reverse Proxy (right) -->
+  <rect x="490" y="474" width="180" height="66" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="580" y="503" text-anchor="middle" font-size="12" fill="#e6edf3">GitLab CE</text>
+  <text x="580" y="521" text-anchor="middle" font-size="9" fill="#6e7681">internal / external runners</text>
+
+  <rect x="720" y="474" width="150" height="40" rx="6" fill="#161b22" stroke="#00cc7a" stroke-width="1.5"/>
+  <text x="795" y="499" text-anchor="middle" font-size="13" fill="#e6edf3">OpenVPN</text>
+
+  <rect x="720" y="522" width="150" height="44" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="795" y="541" text-anchor="middle" font-size="12" fill="#e6edf3">Reverse Proxy</text>
+  <text x="795" y="557" text-anchor="middle" font-size="11" fill="#6e7681">(Traefik)</text>
+
+  <!-- VMs -->
+  <rect x="500" y="620" width="100" height="42" rx="4" fill="#1c2128" stroke="#30363d" stroke-width="1.2"/>
+  <text x="550" y="646" text-anchor="middle" font-size="11" fill="#e6edf3">SIEM (Wazuh)</text>
+
+  <rect x="612" y="620" width="92" height="42" rx="4" fill="#1c2128" stroke="#30363d" stroke-width="1.2"/>
+  <text x="658" y="646" text-anchor="middle" font-size="11" fill="#e6edf3">Windows 11</text>
+
+  <rect x="716" y="620" width="92" height="42" rx="4" fill="#1c2128" stroke="#30363d" stroke-width="1.2"/>
+  <text x="762" y="646" text-anchor="middle" font-size="11" fill="#e6edf3">Ubuntu lab</text>
+
+  <rect x="820" y="620" width="120" height="42" rx="4" fill="#1c2128" stroke="#30363d" stroke-width="1.2"/>
+  <text x="880" y="646" text-anchor="middle" font-size="11" fill="#e6edf3">Fedora lab</text>
+
+  <!-- REMnux: a VM too, but NAT-isolated - sits inside the VMs box, dashed -->
+  <rect x="500" y="672" width="440" height="44" rx="4" fill="#161b22" stroke="#6e7681" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="720" y="693" text-anchor="middle" font-size="11" fill="#e6edf3">REMnux VM</text>
+  <text x="720" y="708" text-anchor="middle" font-size="10" fill="#6e7681">NAT-isolated &#183; no LAN bridge</text>
+
+  <!-- host services -->
+  <rect x="490" y="744" width="125" height="44" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="552" y="771" text-anchor="middle" font-size="11" fill="#e6edf3">Unbound (DNS)</text>
+
+  <rect x="635" y="744" width="125" height="44" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="697" y="771" text-anchor="middle" font-size="11" fill="#e6edf3">dnsproxy (DoH)</text>
+
+  <rect x="780" y="744" width="170" height="44" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="865" y="771" text-anchor="middle" font-size="11" fill="#e6edf3">Suricata IDS</text>
+</svg>
