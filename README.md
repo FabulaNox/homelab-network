@@ -1,6 +1,6 @@
 <div align="center">
 
-# homelab-network
+# NoxLab Network
 
 **The network under a self-hosted security homelab: one inbound port, a self-fanning wildcard cert, self-hosted DNS, and router-side failover.**
 
